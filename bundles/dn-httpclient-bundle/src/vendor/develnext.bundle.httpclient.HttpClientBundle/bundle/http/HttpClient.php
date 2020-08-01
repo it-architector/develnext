@@ -564,7 +564,9 @@ class HttpClient extends AbstractScript
                 $out->write($this->_boundary);
                 $out->write(self::CRLF);
 
-                $name = urlencode($name);
+                /*$name = urlencode($name); <--- no work on massive: category[0] = 'main';*/
+                $name = str_replace('"','\"',$name);
+                
                 $out->write("Content-Disposition: form-data; name=\"$name\"");
                 $out->write(self::CRLF);
 
